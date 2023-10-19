@@ -1,0 +1,43 @@
+docker stop ethereum_geth-miner_1
+docker stop ethereum_geth-bootnode_1
+docker stop ethereum_geth-rpc-endpoint_1
+
+docker rm ethereum_geth-rpc-endpoint_1
+docker rm ethereum_geth-miner_1
+docker rm ethereum_geth-bootnode_1
+
+docker-compose up -d
+docker exec -it ethereum_geth-bootnode_1 sh
+
+docker ps -a
+
+docker stop ethereum
+docker rm ethereum
+docker run -d --name ethereum -v ~/ethereum:/ethereum --allow-insecure-unlock -http -p 8545:8545 -p 30303:30303 -ipcapi="eth,admin,web3,personal" -http.api="eth,web3,net,admin,personal" ethereum/client-go
+
+
+docker exec -it ethereum_geth-bootnode_1 sh
+
+docker logs ethereum_geth-rpc-endpoint_1
+
+
+curl --location --request POST 'localhost:8545' --header 'Content-Type: application/json' --data-raw '{ "jsonrpc": "2.0", "id": 1, "method": "eth_accounts", "params": [] }'
+
+personal.unlockAccount(eth.accounts[0], "superSecret")
+
+ curl --location --request POST '192.168.99.104:8545' --header 'Content-Type: application/json' --data-raw '{ "jsonrpc": "2.0", "id": 1, "method": "admin_peers", "params": []}'
+ curl --location --request POST '192.168.99.104:8545' --header 'Content-Type: application/json' --data-raw '{ "jsonrpc": "2.0", "id": 1, "method": "eth_accounts", "params": [] }'
+ curl --location --request POST '192.168.99.104:8545' --header 'Content-Type: application/json' --data-raw '{ "jsonrpc": "2.0", "id": 2, "method": "eth_blockNumber", "params": []}'
+
+
+
+ curl --location --request POST '192.168.99.104:8545' --header 'Content-Type: application/json' --data-raw '{ "jsonrpc": "2.0", "id": 3, "method": "eth_accounts", "params": [] }'
+
+ curl --location --request POST '192.168.99.104:8545' --header 'Content-Type: application/json' --data-raw '{ "jsonrpc": "2.0", "id": 4, "method": "eth_getBalance", "params": ["0x40d2e869f57814fd065e5a07ba6436af0ca09841", "latest" ] }'
+
+ curl --location --request POST '192.168.99.104:8545' --header 'Content-Type: application/json' --data-raw '{ "jsonrpc": "2.0", "id": 4, "method": "eth_getBalance", "params": ["0x40d2e869f57814fd065e5a07ba6436af0ca09841", "latest" ] }'
+
+
+curl --location --request POST 'http://192.168.99.104:8545' --header 'Content-type: application/json' --data-raw '{ "jsonrpc": "2.0", "id": 5, "method": "personal_newAccount", "params": [ "superSecret" ]}'
+
+curl -k POST 'http://localhost:8080/owner' --header 'Content-type: application/json' 
