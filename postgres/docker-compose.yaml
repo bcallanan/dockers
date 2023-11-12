@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  postgres:
+    hostname: postgres14
+    image: postgres:14-alpine
+    restart: always
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - 5438:5432
+    volumes:
+      - ~/postgresdb:/var/lib/postgresql/data
+      # copy schema script add load the scehma
+      - ~/git/dockers/postgres/sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      # copy the sql script to fill tables
+      - ./sql/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+
+    environment:
+      - POSTGRES_PASSWORD=Password#1
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=pgres_db
+      - PGDATA=/tmp
