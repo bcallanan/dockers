@@ -1,34 +1,115 @@
 version: '3.7'
 
 services:
-  zookeeper:
-    hostname: zookeeper
+  zk1:
+    hostname: zookeeper1
     image: confluentinc/cp-zookeeper:7.5.2
+    restart: always
     environment:
-      ZOOKEEPER_CLIENT_PORT: 22181
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+      ZOO_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+      ZOO_SERVERS: 0.0.0.0:2888:3888,zk2:2888:3888
     ports:
-      - 22181:22181
+      - 22181:2181
+      - 8081:8080
+    volumes:
+      - ~/zookeeper/data1:/var/lib/zookeeper/data
+      - ~/zookeeper/logs1:/var/lib/zookeeper/log
     networks:
       priv-kafka-net:
  
-  kafka:
-    hostname: kafka
+  zk2:
+    hostname: zookeeper2
+    restart: always
+    image: confluentinc/cp-zookeeper:7.5.2
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+      ZOO_SERVER_ID: 2
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOO_SERVERS: zk1:2888:3888,0.0.0.0:2888:3888
+    ports:
+      - 22182:2181
+      - 8082:8080
+    volumes:
+      - ~/zookeeper/data2:/var/lib/zookeeper/data
+      - ~/zookeeper/logs2:/var/lib/zookeeper/log
+    networks:
+      priv-kafka-net:
+ 
+  zoonavigator:
+    container_name: zoonavigator
+    image: elkozmon/zoonavigator
+    ports:
+      - 9000:9000
+    networks:
+      priv-kafka-net:
+
+  kaf1:
+    hostname: kafka1
+    restart: always
     image: confluentinc/cp-kafka:7.5.2
     depends_on:
-      - zookeeper
+      - zk1
+      - zk2
     ports:
-      - "29092:29092"
-      - "29093:29093"
+      - "29092:9092"
+      - "29093:9093"
     volumes:
-      - ~/kafka:/var/lib/kafka/data
+      - ~/kafka/data1:/var/lib/kafka/data
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 192.168.99.108:22181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.99.108:29092, PLAINTEXT_HOST://192.168.99.108:29093
+      KAFKA_ZOOKEEPER_CONNECT: zk1:2181,zk2:2182
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kaf1:9092, PLAINTEXT_HOST://192.168.99.108:29093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    networks:
+      priv-kafka-net:
+
+  kaf2:
+    hostname: kafka2
+    restart: always
+    image: confluentinc/cp-kafka:7.5.2
+    depends_on:
+      - zk1
+      - zk2
+    ports:
+      - "29094:9092"
+      - "29095:9093"
+    volumes:
+      - ~/kafka/data2:/var/lib/kafka/data
+    environment:
+      KAFKA_BROKER_ID: 2
+      KAFKA_ZOOKEEPER_CONNECT: zk1:2181,zk2:2182
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kaf2:9094, PLAINTEXT_HOST://192.168.99.108:29095
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    networks:
+      priv-kafka-net:
+
+  kaf3:
+    hostname: kafka3
+    restart: always
+    image: confluentinc/cp-kafka:7.5.2
+    depends_on:
+      - zk1
+      - zk2
+    ports:
+      - "29096:9092"
+      - "29097:9093"
+    volumes:
+      - ~/kafka/data3:/var/lib/kafka/data
+    environment:
+      KAFKA_BROKER_ID: 3
+      KAFKA_ZOOKEEPER_CONNECT: zk1:2181,zk2:2182
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kaf3:9096, PLAINTEXT_HOST://192.168.99.108:29097
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     networks:
       priv-kafka-net:
 
