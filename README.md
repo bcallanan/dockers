@@ -3,7 +3,8 @@ my docker set ups
 
 Hi there, this is my docker repo. They all work except mysql - sorry the volumes used for data, etc. are just a major problem
 with regard to docker/windows/virtualbox. I was recently notified or updated that docker is coming out with newer updates with some
-type of 'watcher' functionality for volume use. 
+type of 'watcher' functionality for volume use. I think its not exactly a solution to the WFS (Windows filesystems issus) that are common
+with using volume mounts inside your docker env. Especially when you're bridging networks thru virtualbox.
 
 Here's the link:
 
