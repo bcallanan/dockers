@@ -1,8 +1,9 @@
 # dockers
 my docker set ups
 
-Hi there, this is my docker repo. They all work except nysql - sorry the volumes used for data, etc. are just a major problem
-with regard to docker/windows/virtualbox. When I get the compose perfect I'll remove this commentary and explain further why
+Hi there, this is my docker repo. They all work except mysql - sorry the volumes used for data, etc. are just a major problem
+with regard to docker/windows/virtualbox. I was recently notified or updated that docker is coming out with newer updates with some
+type of 'watcher' functionality for volume use. When I get the compose perfect I'll remove this commentary and explain further why
 mySql seems a bit more touchy over postgres. Cause the postgres docker just plain works! I have two dockers there that have schema
 and data which will give you a really good database to start from.
 
@@ -17,7 +18,8 @@ Got it working, built a blockchain microservice that had hooks into the docker s
 Instead, they asked maxOccurence Element in a list of integers or strings whaever the case. 
 
 here's the magic on that one... Though I really wanted the job they went with someone else. I had wished they asked about blockchain and
-what I had accomplished. But at least I learned a lot about myself and the technology. No harm / no foul.
+what I had accomplished. But at least I learned a lot about myself and the technology. No harm / no foul. My appologies for my disappointment
+there.
 
 	/*
 	 * Problem Stateament
