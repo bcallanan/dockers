@@ -8,6 +8,7 @@ set session my.number_of_cities = '30';
 set session my.status_names = '5';
 set session my.start_date = '2019-01-01 00:00:00';
 set session my.end_date = '2020-02-01 00:00:00';
+set session my.password = 'password';
 
 -- load the pgcrypto extension to gen_random_uuid ()
 CREATE EXTENSION pgcrypto;
@@ -37,10 +38,17 @@ select id
 FROM GENERATE_SERIES(1, current_setting('my.number_of_stores')::int) as id;
 
 -- Filling of users
+INSERT INTO users VALUES (1, 'brian', 'password', '1');
+INSERT INTO authorities VALUES (1, 'brian', 'write');
+
+select id, concat('User ', id), current_setting('my.password'), '1'
+FROM GENERATE_SERIES(2, current_setting('my.number_of_users')::int) as id;
 INSERT INTO users
-select id
-	, concat('User ', id)
-FROM GENERATE_SERIES(1, current_setting('my.number_of_users')::int) as id;
+select id,
+	 concat('User ', id),
+ 	 current_setting('my.password'),
+	 '1'
+FROM GENERATE_SERIES(2, current_setting('my.number_of_users')::int) as id;
 
 -- Filling of users
 INSERT INTO status_name

@@ -33,13 +33,27 @@ CREATE TABLE IF NOT EXISTS store (
       FOREIGN KEY(city_id) 
 	  REFERENCES city(city_id)
 );
-
--- Creation of user table
 CREATE TABLE IF NOT EXISTS users (
   user_id INT NOT NULL,
-  name varchar(250) NOT NULL,
+  username varchar(50) not null,
+  password varchar(500) not null,
+  enabled boolean not null,
   PRIMARY KEY (user_id)
 );
+  
+create table authorities (
+   user_id INT NOT NULL primary key,
+   username varchar(50) not null,
+   authority varchar(50) not null,
+   constraint fk_authorities_users foreign key(user_id) references users(user_id));
+CREATE UNIQUE INDEX ix_auth_username ON authorities (user_id,authority);
+
+-- Creation of user table
+--CREATE TABLE IF NOT EXISTS users (
+--  user_id INT NOT NULL,
+--  name varchar(250) NOT NULL,
+--  PRIMARY KEY (user_id)
+--);
 
 -- Creation of status_name table
 CREATE TABLE IF NOT EXISTS status_name (
@@ -61,8 +75,8 @@ CREATE TABLE IF NOT EXISTS sale (
       FOREIGN KEY(product_id) 
 	  REFERENCES product(product_id),
   CONSTRAINT fk_user
-      FOREIGN KEY(user_id) 
-	  REFERENCES users(user_id),
+      FOREIGN KEY( user_id ) 
+	  REFERENCES users( user_id),
   CONSTRAINT fk_store
       FOREIGN KEY(store_id) 
 	  REFERENCES store(store_id)	  
