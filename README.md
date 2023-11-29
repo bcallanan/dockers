@@ -21,9 +21,9 @@ functional example you can start with: 'functionalPostgresAuthenticationWithSpri
 If you want to try it out and you get stuck I can help. Just ask!
 
 Oh, and by the way the ethereum docker works too! I have or will expose the ethereum microservice repo which will work with that
-docker-compose. I had applied for an opportunity the had the job desc covering it. So, at first, I did a crash-course in ethereum blockchain. 
+docker-compose. I had applied for an opportunity that had a job desc covering it. So, at first, I did a crash-course in ethereum blockchain. 
 Got it working, built a blockchain microservice that had hooks into the docker set up. Then, they didnt even ask a single question on it.
-Instead, they asked maxOccurence Element in a list of integers or strings whaever the case. 
+Instead, they asked maxOccurence Element in a list of integers or strings whatever the case (either works). 
 
 here's the magic on that one... Though I really wanted the job they went with someone else. I had wished they asked about blockchain and
 what I had accomplished. But at least I learned a lot about myself and the technology. No harm / no foul. My appologies for my disappointment
