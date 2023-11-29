@@ -3,7 +3,14 @@ my docker set ups
 
 Hi there, this is my docker repo. They all work except mysql - sorry the volumes used for data, etc. are just a major problem
 with regard to docker/windows/virtualbox. I was recently notified or updated that docker is coming out with newer updates with some
-type of 'watcher' functionality for volume use. When I get the compose perfect I'll remove this commentary and explain further why
+type of 'watcher' functionality for volume use. 
+
+Here's the link:
+
+   https://dev.to/code42cate/say-goodbye-to-docker-volumes-j9l
+
+
+When I get the compose perfect I'll remove this commentary and explain further why
 mySql seems a bit more touchy over postgres. Cause the postgres docker just plain works! I have two dockers there that have schema
 and data which will give you a really good database to start from.
 
