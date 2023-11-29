@@ -12,9 +12,9 @@ functional example you can start with: 'functionalPostgresAuthenticationWithSpri
 
 If you want to try you had there I can help if you get stuck. Just ask!
 
-Oh, and by the way the ethereum docker works too! I have or will expose that repo which will work with that docker-compose. I did that
-project cause a Fidelity Investment opportunity had the job desc covering it. So at first I did a crash-course in ethereum blockchain. 
-Got it working, built a blockchain microservice that had hooks into the docker set up. Then, FI didnt even ask a single question on it.
+Oh, and by the way the ethereum docker works too! I have or will expose that repo which will work with that docker-compose. I had applied
+for an opportunity the had the job desc covering it. So, at first, I did a crash-course in ethereum blockchain. 
+Got it working, built a blockchain microservice that had hooks into the docker set up. Then, they didnt even ask a single question on it.
 Instead, they asked maxOccurence Element in a list of integers or strings whaever the case. 
 
 here's the magic on that one... Though I really wanted the job they went with someone else. I had wished they asked about blockchain and
