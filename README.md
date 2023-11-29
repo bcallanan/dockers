@@ -12,16 +12,16 @@ Here's the link:
 
 
 When I get the compose perfect I'll remove this commentary and explain further why
-mySql seems a bit more touchy over postgres. Cause the postgres docker just plain works! I have two dockers there that have schema
-and data which will give you a really good database to start from.
+mySql seems a bit more touchy over postgres. Cause the postgres docker just plain works! 
+I have two dockers there that have schema and data which will give you a really good database to start from.
 
-The pgsecdb database is used in conjuction with the springrestsecury repo i have also share publicly. I have also branched a solid
+The pgsecdb database is used in conjuction with the springrestsecury repo i have also shared publicly. I have also branched a solid
 functional example you can start with: 'functionalPostgresAuthenticationWithSpring'
 
-If you want to try you had there I can help if you get stuck. Just ask!
+If you want to try it out and you get stuck I can help. Just ask!
 
-Oh, and by the way the ethereum docker works too! I have or will expose that repo which will work with that docker-compose. I had applied
-for an opportunity the had the job desc covering it. So, at first, I did a crash-course in ethereum blockchain. 
+Oh, and by the way the ethereum docker works too! I have or will expose the ethereum microservice repo which will work with that
+docker-compose. I had applied for an opportunity the had the job desc covering it. So, at first, I did a crash-course in ethereum blockchain. 
 Got it working, built a blockchain microservice that had hooks into the docker set up. Then, they didnt even ask a single question on it.
 Instead, they asked maxOccurence Element in a list of integers or strings whaever the case. 
 
