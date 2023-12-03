@@ -38,7 +38,10 @@ select id
 FROM GENERATE_SERIES(1, current_setting('my.number_of_stores')::int) as id;
 
 -- Filling of users
-INSERT INTO users VALUES (1, 'brian', 'password', '1');
+--INSERT INTO users VALUES (1, 'brian', 'password', '1');
+
+
+INSERT INTO customer VALUES ( NEXTVAL('customer_seq'), 'callanankids@gmail.com', 'password', 'admin');
 INSERT INTO authorities VALUES (1, 'brian', 'write');
 
 select id, concat('User ', id), current_setting('my.password'), '1'

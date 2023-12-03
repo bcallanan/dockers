@@ -33,6 +33,21 @@ CREATE TABLE IF NOT EXISTS store (
       FOREIGN KEY(city_id) 
 	  REFERENCES city(city_id)
 );
+
+CREATE SEQUENCE customer_seq START 1 INCREMENT 1; -- OWNED BY customer.customer_id;
+CREATE TABLE IF NOT EXISTS customer (
+  customer_id SERIAL,-- INT NOT NULL,
+  email_address varchar(50) not null,
+  pwd varchar(200) not null,
+  role varchar(45) not null,
+  PRIMARY KEY (customer_id)
+);
+CREATE TABLE IF NOT EXISTS card (
+  card_id INT NOT NULL,
+  card_name varchar(50) not null,
+  PRIMARY KEY (card_id)
+);
+
 CREATE TABLE IF NOT EXISTS users (
   user_id INT NOT NULL,
   username varchar(50) not null,
