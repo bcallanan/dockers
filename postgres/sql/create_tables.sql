@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS store (
 CREATE SEQUENCE customer_seq START 1 INCREMENT 1; -- OWNED BY customer.customer_id;
 CREATE TABLE IF NOT EXISTS customer (
   customer_id SERIAL,-- INT NOT NULL,
-  email_address varchar(50) not null,
+  email_address varchar(50) UNIQUE not null,
   pwd varchar(200) not null,
   role varchar(45) not null,
   PRIMARY KEY (customer_id)
