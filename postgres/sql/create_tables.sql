@@ -34,18 +34,92 @@ CREATE TABLE IF NOT EXISTS store (
 	  REFERENCES city(city_id)
 );
 
-CREATE SEQUENCE customer_seq START 1 INCREMENT 1; -- OWNED BY customer.customer_id;
+--CREATE SEQUENCE customer_seq START 1 INCREMENT 1; -- OWNED BY customer.customer_id;
 CREATE TABLE IF NOT EXISTS customer (
-  customer_id SERIAL,-- INT NOT NULL,
-  email_address varchar(50) UNIQUE not null,
-  pwd varchar(200) not null,
-  role varchar(45) not null,
+  customer_id SERIAL,
+  name varchar(100) DEFAULT NULL,
+  email_address varchar(100) UNIQUE NOT NULL,
+  mobile_number varchar(20) DEFAULT NULL,
+  pwd varchar(200) NOT NULL,
+  role varchar(50) NOT NULL,
+  create_date date DEFAULT NULL,
   PRIMARY KEY (customer_id)
 );
+CREATE TABLE IF NOT EXISTS accounts (
+  customer_id INT NOT NULL,
+  account_number SERIAL,
+  account_type INT, --VARCHAR(100) UNIQUE NOT NULL,
+  branch_address varchar(200) NOT NULL,
+  create_date date DEFAULT NULL,
+  PRIMARY KEY (account_number),
+  CONSTRAINT fk_customer_id
+      FOREIGN KEY( customer_id )
+	  REFERENCES customer( customer_id ) on DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS account_transactions (
+  transaction_id SERIAL,
+  account_number INT NOT NULL,
+  customer_id INT NOT NULL,
+  transaction_date date NOT NULL,
+  transaction_summary VARCHAR(200) NOT NULL,
+  transaction_type INT,--VARCHAR(100) NOT NULL,
+  transaction_amount INT NOT NULL,
+  closing_balance INT NOT NULL,
+  create_date date DEFAULT NULL,
+  PRIMARY KEY (transaction_id),
+  CONSTRAINT fk_account_number 
+      FOREIGN KEY( account_number )
+	  REFERENCES accounts ( account_number ) on DELETE CASCADE,
+  CONSTRAINT fk_customer_id
+      FOREIGN KEY( customer_id )
+	  REFERENCES customer ( customer_id ) on DELETE CASCADE
+);
 CREATE TABLE IF NOT EXISTS card (
-  card_id INT NOT NULL,
-  card_name varchar(50) not null,
-  PRIMARY KEY (card_id)
+  card_id SERIAL,
+  card_number INT NOT NULL,
+  customer_id INT NOT NULL,
+  card_type INT, --VARCHAR(100) NOT NULL,
+  card_limit INT NOT NULL,
+  amount_outstanding INT NOT NULL,
+  amount_available INT NOT NULL,
+  create_date date DEFAULT NULL,
+  PRIMARY KEY (card_id),
+  CONSTRAINT fk_customer_id
+      FOREIGN KEY( customer_id )
+	  REFERENCES customer ( customer_id ) on DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS loans (
+  loan_number SERIAL,
+  customer_id INT NOT NULL,
+  start_date date NOT NULL,
+  loan_type INT, --VARCHAR(100) NOT NULL,
+  total_loan_value INT NOT NULL,
+  amount_paid INT NOT NULL,
+  outstanding_balance INT NOT NULL,
+  create_date date DEFAULT NULL,
+  PRIMARY KEY (loan_number),
+  CONSTRAINT fk_customer_id
+      FOREIGN KEY( customer_id )
+	  REFERENCES customer ( customer_id ) on DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS notice_details (
+  notice_id SERIAL,
+  notice_summary VARCHAR(200) NOT NULL,
+  notice_details VARCHAR(500) NOT NULL,
+  notice_begin_date DATE NOT NULL,
+  notice_end_date DATE DEFAULT NULL,
+  create_date DATE DEFAULT NULL,
+  update_date DATE DEFAULT NULL,
+  PRIMARY KEY (notice_id)
+);
+CREATE TABLE IF NOT EXISTS contact_messages (
+  contact_id VARCHAR(100) NOT NULL,
+  contact_name VARCHAR(100) NOT NULL,
+  contact_email VARCHAR(100) NOT NULL,
+  subject VARCHAR(500) NOT NULL,
+  message VARCHAR(2000) NOT NULL,
+  create_date DATE DEFAULT NULL,
+  PRIMARY KEY (contact_id)
 );
 
 CREATE TABLE IF NOT EXISTS users (
@@ -62,13 +136,6 @@ create table authorities (
    authority varchar(50) not null,
    constraint fk_authorities_users foreign key(user_id) references users(user_id));
 CREATE UNIQUE INDEX ix_auth_username ON authorities (user_id,authority);
-
--- Creation of user table
---CREATE TABLE IF NOT EXISTS users (
---  user_id INT NOT NULL,
---  name varchar(250) NOT NULL,
---  PRIMARY KEY (user_id)
---);
 
 -- Creation of status_name table
 CREATE TABLE IF NOT EXISTS status_name (
