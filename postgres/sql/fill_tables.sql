@@ -40,9 +40,7 @@ FROM GENERATE_SERIES(1, current_setting('my.number_of_stores')::int) as id;
 -- Filling of users
 INSERT INTO users VALUES (1, 'brian', 'password', '1');
 
-
---INSERT INTO customer VALUES ( NEXTVAL('customer_seq'), 'callanankids@gmail.com', 'password', 'admin');
-INSERT INTO authorities VALUES (1, 'brian', 'admin');
+--INSERT INTO authorities VALUES (1, 'brian', 'admin');
 
 select id, concat('User ', id), current_setting('my.password'), '1'
 FROM GENERATE_SERIES(2, current_setting('my.number_of_users')::int) as id;
@@ -81,6 +79,25 @@ select gen_random_uuid ()
 	, floor(random() * (current_setting('my.status_names')::int) + 1)::int
 from sale;
 
+
+INSERT INTO customer( name, mobile_number, email_address, pwd, role, create_date)
+  VALUES ( 'Brian Callanan', '978 888 5867', 'callanankids@gmail.com', '$2a$10$un2QuJbH/EUnst2CTP4baO0M69UjQ1yCLuVxFV.SOq6dN6lUjlitG', 'admin', NOW());
+INSERT INTO accounts ( customer_id, account_number, account_type, branch_address, create_date)
+  VALUES (1, 1865764534, 0, '123 Main Street, New York', NOW());
+
+--INSERT INTO authorities (customer_id, authority_type_action)
+-- VALUES (1, 'VIEWACCOUNT');
+--INSERT INTO authorities (customer_id, authority_type_action)
+-- VALUES (1, 'VIEWCARDS');
+-- INSERT INTO authorities (customer_id, authority_type_action)
+--  VALUES (1, 'VIEWLOANS');
+-- INSERT INTO authorities (customer_id, authority_type_action)
+--   VALUES (1, 'VIEWBALANCE');
+ INSERT INTO authorities (customer_id, authority_type_action)
+   VALUES (1, 'ROLE_USER');
+ INSERT INTO authorities (customer_id, authority_type_action)
+   VALUES (1, 'ROLE_ADMIN');
+
 INSERT INTO notice_details ( notice_summary, notice_details, notice_begin_date, notice_end_date, create_date, update_date)
 VALUES ('Home Loan Interest rates reduced', 'Home loan interest rates are reduced as per the goverment guidelines. The updated rates will be effective immediately',
 NOW() - INTERVAL '30 DAY', NOW() + INTERVAL '30 DAY', NOW(), null);
@@ -104,3 +121,47 @@ NOW() - INTERVAL '30 DAY', NOW() + INTERVAL '30 DAY', NOW(), null);
 INSERT INTO notice_details ( notice_summary, notice_details, notice_begin_date, notice_end_date, create_date, update_date)
 VALUES ('COVID-19 Insurance', 'EazyBank launched an insurance policy which will cover COVID-19 expenses. Please reach out to the branch for more details',
 NOW() - INTERVAL '30 DAY', NOW() + INTERVAL '30 DAY', NOW(), null);
+
+INSERT INTO cards (card_number, customer_id, card_type, card_limit, amount_outstanding, amount_available, create_date)
+ VALUES ('4565XXXX4656', 1, 0, 10000, 500, 9500, NOW());
+
+INSERT INTO cards (card_number, customer_id, card_type, card_limit, amount_outstanding, amount_available, create_date)
+ VALUES ('3455XXXX8673', 1, 0, 7500, 600, 6900, NOW());
+
+INSERT INTO cards (card_number, customer_id, card_type, card_limit, amount_outstanding, amount_available, create_date)
+ VALUES ('2359XXXX9346', 1, 0, 20000, 4000, 16000, NOW());
+ 
+INSERT INTO cards (card_number, customer_id, card_type, card_limit, amount_outstanding, amount_available, create_date)
+ VALUES ('2359XXXX1234', 1, 1, 20000, 4000, 16000, NOW());
+
+INSERT INTO loans ( customer_id, start_date, loan_type, total_loan_value, amount_paid, outstanding_balance, create_date)
+ VALUES ( 1, '2020-10-13', 3, 200000, 50000, 150000, '2020-10-13');
+
+INSERT INTO loans ( customer_id, start_date, loan_type, total_loan_value, amount_paid, outstanding_balance, create_date)
+ VALUES ( 1, '2020-06-06', 4, 40000, 10000, 30000, '2020-06-06');
+
+INSERT INTO loans ( customer_id, start_date, loan_type, total_loan_value, amount_paid, outstanding_balance, create_date)
+ VALUES ( 1, '2018-02-14', 3, 50000, 10000, 40000, '2018-02-14');
+
+INSERT INTO loans ( customer_id, start_date, loan_type, total_loan_value, amount_paid, outstanding_balance, create_date)
+ VALUES ( 1, '2018-02-14', 5, 10000, 3500, 6500, '2018-02-14');
+
+INSERT INTO account_transactions (account_number, customer_id, transaction_date, transaction_summary, transaction_type, transaction_amount,
+closing_balance, create_date)  VALUES ( 1865764534, 1, NOW() + INTERVAL '7 DAY', 'Coffee Shop', 1, 30,34500, NOW() + INTERVAL '7 DAY');
+
+INSERT INTO account_transactions ( account_number, customer_id, transaction_date, transaction_summary, transaction_type, transaction_amount,
+closing_balance, create_date)  VALUES ( 1865764534, 1, NOW() + INTERVAL '6 DAY', 'Uber', 1, 100,34400, NOW() + INTERVAL '6 DAY');
+
+INSERT INTO account_transactions ( account_number, customer_id, transaction_date, transaction_summary, transaction_type, transaction_amount,
+closing_balance, create_date)  VALUES ( 1865764534, 1, NOW() + INTERVAL '5 DAY', 'Self Deposit', 0, 500,34900, NOW() + INTERVAL '5 DAY');
+
+INSERT INTO account_transactions ( account_number, customer_id, transaction_date, transaction_summary, transaction_type, transaction_amount,
+closing_balance, create_date)  VALUES ( 1865764534, 1, NOW() + INTERVAL '4 DAY', 'Ebay', 1, 600,34300, NOW() + INTERVAL '4 DAY');
+
+INSERT INTO account_transactions (account_number, customer_id, transaction_date, transaction_summary, transaction_type, transaction_amount,
+closing_balance, create_date)  VALUES ( 1865764534, 1, NOW() + INTERVAL '2 DAY', 'OnlineTransfer', 0, 700,35000, NOW() + INTERVAL '2 DAY');
+
+INSERT INTO account_transactions (account_number, customer_id, transaction_date, transaction_summary, transaction_type, transaction_amount,
+closing_balance, create_date)  VALUES ( 1865764534, 1, NOW() + INTERVAL '1 DAY', 'Amazon.com', 1, 100,34900, NOW() + INTERVAL '1 DAY');
+
+
