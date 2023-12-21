@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.7'
 
 services:
   pgcloak:
@@ -13,6 +13,8 @@ services:
       - priv-net-5
 
   keycloak:
+    # This is Quarkus enabled not JBOSS
+    # latest is 22.0.5-0
     image: bitnami/keycloak:latest
     environment:
       DB_VENDOR: POSTGRES
@@ -21,7 +23,7 @@ services:
       DB_USER: keycloak
       DB_SCHEMA: public
       DB_PASSWORD: password
-      KEYCLOAK_USER: admin
+      KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: password
       #KEYCLOAK_LOG_LEVEL: TRACE
       #ROOT_LOG_LEVEL: TRACE

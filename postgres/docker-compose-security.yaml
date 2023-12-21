@@ -4,6 +4,7 @@ services:
   pgsec:
     hostname: postgres14
     image: postgres:14-alpine
+    #image: postgres:14-alpine
     restart: always
     logging:
       options:
@@ -23,3 +24,10 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=pgsecdb
       - PGDATA=/tmp
+
+networks:
+  priv-net-4:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 192.168.4.0/28
